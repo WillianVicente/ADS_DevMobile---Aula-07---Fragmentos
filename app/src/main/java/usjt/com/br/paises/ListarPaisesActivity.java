@@ -23,16 +23,14 @@ public class ListarPaisesActivity extends Activity {
 
         try {
             lista = buscaPaises(chave);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 
         ArrayAdapter <String> adapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, lista);
+                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lista);
         ListView listView =
-                (ListView) findViewById(R.id.listView);
+                findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
         //listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -49,9 +47,9 @@ public class ListarPaisesActivity extends Activity {
 
         if(chave.equals("Todas")){
             chave = "all";
-            return ReadJson.SendPost("https://restcountries.eu/rest/v2/" + chave);
+            return ReadJson.SendGet("https://restcountries.eu/rest/v2/" + chave);
         }else{
-            return ReadJson.SendPost("https://restcountries.eu/rest/v2/region/" + chave);
+            return ReadJson.SendGet("https://restcountries.eu/rest/v2/region/" + chave);
         }
 
     }

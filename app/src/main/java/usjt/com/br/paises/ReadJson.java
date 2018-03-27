@@ -27,7 +27,7 @@ public class ReadJson {
     private static List<String> lista;
 
 
-    public static List<String> SendPost(final String URL) throws InterruptedException {
+    static List<String> SendGet(final String URL) throws InterruptedException {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -54,16 +54,13 @@ public class ReadJson {
         return getLista();
     }
 
-    public static ArrayList<String> readJsonStream(InputStream in) throws IOException {
-        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-        try {
+    private static ArrayList<String> readJsonStream(InputStream in) throws IOException {
+        try (JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"))) {
             return readMessagesArray(reader);
-        } finally {
-            reader.close();
         }
     }
 
-    public static ArrayList<String> readMessagesArray(JsonReader reader) throws IOException {
+    private static ArrayList<String> readMessagesArray(JsonReader reader) throws IOException {
         //List<Pais> paises = new ArrayList<Pais>();
         ArrayList<String> lista = new ArrayList<>();
 
@@ -75,7 +72,7 @@ public class ReadJson {
         return lista;
     }
 
-    public static String readMessage(JsonReader reader) throws IOException {
+    private static String readMessage(JsonReader reader) throws IOException {
 
         String nome = "";
        //String codigo3;
