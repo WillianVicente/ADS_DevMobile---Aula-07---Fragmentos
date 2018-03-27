@@ -3,6 +3,8 @@ package usjt.com.br.paises;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import java.io.IOException;
@@ -11,6 +13,8 @@ import java.util.List;
 
 public class ListarPaisesActivity extends Activity {
     private List<String> lista;
+    public static final String DESCRICAO =
+            "br.usjt.paises.descricao";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +37,14 @@ public class ListarPaisesActivity extends Activity {
                 findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
-        //listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        //    @Override
-        //    public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-        //        Intent intent = new Intent (ListarChamadosActivity.this, DetalheChamadoActivity.class);
-        //        intent.putExtra(DESCRICAO, lista.get(pos));
-        //        startActivity(intent);
-        //    }
-        //});
+         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+             @Override
+             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                 Intent intent = new Intent (ListarPaisesActivity.this, DetalheChamadoActivity.class);
+                 intent.putExtra(DESCRICAO, lista.get(pos));
+                 startActivity(intent);
+             }
+         });
     }
 
     public List<String> buscaPaises(String chave) throws IOException, InterruptedException {
