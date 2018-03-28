@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListarPaisesActivity" />
+        <activity android:name=".DetalheChamadoActivity" />
     </application>
 
 </manifest>

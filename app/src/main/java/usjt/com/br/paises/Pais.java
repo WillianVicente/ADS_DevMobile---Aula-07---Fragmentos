@@ -8,29 +8,32 @@ import java.util.ArrayList;
 
 public class Pais {
 
-    String nome;
-    String codigo3;
-    String capital;
-    String regiao;
-    String subRegiao;
-    String demonimo;
-    int populacao;
-    int area;
-    String bandeira;
-    double gini;
-    ArrayList<String> idiomas;
-    ArrayList<String> moedas;
-    ArrayList<String> dominios;
-    ArrayList<String> fusos;
-    ArrayList<String> fronteiras;
-    double latitude;
-    double longitude;
+    private String nome;
+    private String codigo3;
+    private String capital;
+    private String regiao;
+    private String subRegiao;
+    private String demonimo;
+    private int populacao;
+    private String area;
+    private String bandeira;
+    private double gini;
+    private ArrayList<String> idiomas;
+    private ArrayList<String> moedas;
+    private ArrayList<String> dominios;
+    private ArrayList<String> fusos;
+    private ArrayList<String> fronteiras;
+    private double latitude;
+    private double longitude;
+
+    public Pais(){
+    }
 
     public Pais(String nome){
         this.nome = nome;
     }
 
-    public Pais(String nome, String codigo3, String capital, String regiao, String subRegiao, String demonimo, int populacao, int area, String bandeira, double gini, ArrayList<String> idiomas, ArrayList<String> moedas, ArrayList<String> dominios, ArrayList<String> fusos, ArrayList<String> fronteiras, double latitude, double longitude) {
+    public Pais(String nome, String codigo3, String capital, String regiao, String subRegiao, String demonimo, int populacao, String area, String bandeira, double gini, ArrayList<String> idiomas, ArrayList<String> moedas, ArrayList<String> dominios, ArrayList<String> fusos, ArrayList<String> fronteiras, double latitude, double longitude) {
         this.nome = nome;
         this.codigo3 = codigo3;
         this.capital = capital;
@@ -106,11 +109,11 @@ public class Pais {
         this.populacao = populacao;
     }
 
-    public int getArea() {
+    public String getArea() {
         return area;
     }
 
-    public void setArea(int area) {
+    public void setArea(String area) {
         this.area = area;
     }
 

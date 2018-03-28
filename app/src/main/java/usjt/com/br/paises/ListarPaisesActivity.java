@@ -37,25 +37,23 @@ public class ListarPaisesActivity extends Activity {
                 findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
-         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-             @Override
-             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                 Intent intent = new Intent (ListarPaisesActivity.this, DetalheChamadoActivity.class);
-                 intent.putExtra(DESCRICAO, lista.get(pos));
-                 startActivity(intent);
-             }
-         });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                Intent intent = new Intent (ListarPaisesActivity.this, DetalheChamadoActivity.class);
+                intent.putExtra(DESCRICAO, lista.get(pos));
+                startActivity(intent);
+            }
+        });
     }
 
     public List<String> buscaPaises(String chave) throws IOException, InterruptedException {
-
         if(chave.equals("Todas")){
             chave = "all";
-            return ReadJson.SendGet("https://restcountries.eu/rest/v2/" + chave);
+            return ReadJson.GetPaisesNames("https://restcountries.eu/rest/v2/" + chave);
         }else{
-            return ReadJson.SendGet("https://restcountries.eu/rest/v2/region/" + chave);
+            return ReadJson.GetPaisesNames("https://restcountries.eu/rest/v2/region/" + chave);
         }
-
     }
 }
 

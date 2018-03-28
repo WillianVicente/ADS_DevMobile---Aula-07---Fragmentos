@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Paises</string>
-    <string name="botao_busca">Buscar</string>
+    <string name="botao_busca">Listar</string>
 </resources>
