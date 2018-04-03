@@ -42,7 +42,7 @@ public class ReadJson {
 
     public static Pais GetDetalhesDoPais(String nome){
         Pais paisSelecionado = new Pais();
-
+        
         for (Pais pais: listaPaises){
             if(pais.getNome().equals(nome)){
                 paisSelecionado = pais;
