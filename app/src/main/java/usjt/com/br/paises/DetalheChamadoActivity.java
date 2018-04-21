@@ -1,9 +1,22 @@
 package usjt.com.br.paises;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by Note-Willian on 3/27/2018.
@@ -31,7 +44,14 @@ public class DetalheChamadoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalhe_chamado);
+        setContentView(R.layout.activity_detalhe_pais);
+        Intent intent = getIntent();
+        String paisSelecionado = intent.getStringExtra(ListarPaisesActivity.DESCRICAO);
+
+        new ConsomeWS().execute("https://restcountries.eu/rest/v2/name/" + paisSelecionado);
+    }
+
+    private void CreateView(Pais pais){
 
         nomeTextView = (TextView) findViewById(R.id.nomeTextView);
         codigo3TextView = (TextView) findViewById(R.id.codigo3TextView);
@@ -45,9 +65,6 @@ public class DetalheChamadoActivity extends AppCompatActivity {
         giniTextView = (TextView) findViewById(R.id.giniTextView);
 
 
-        Intent i = getIntent();
-        String selecionado = i.getStringExtra(ListarPaisesActivity.DESCRICAO);
-        Pais pais = ReadJson.GetDetalhesDoPais(selecionado);
 
         nomeTextView.setText(pais.getNome());
         codigo3TextView.setText(pais.getCodigo3());
@@ -66,5 +83,62 @@ public class DetalheChamadoActivity extends AppCompatActivity {
         //fronteirasTextView.setText(pais.getFronteiras());
         //latitudeTextView.setText(String.valueOf(pais.getLatitude()));
         //longitudeTextView.setText(String.valueOf(pais.getLongitude()));
+    }
+
+    private class ConsomeWS extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(strings[0])
+                    .build();
+            try{
+                Response response = client.newCall(request).execute();
+                return response.body().string();
+            }
+            catch(IOException e){
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String json) {
+            try {
+                Pais pais = new Pais();
+
+                JSONArray paisInfo = new JSONArray(json);
+
+                JSONObject paisDetails = paisInfo.getJSONObject(0);
+                pais.setNome(paisDetails.getString("name"));
+                pais.setCodigo3(paisDetails.getString("alpha3Code"));
+                pais.setCapital(paisDetails.getString("capital"));
+                pais.setRegiao(paisDetails.getString("region"));
+                pais.setSubRegiao(paisDetails.getString("subregion"));
+                pais.setDemonimo(paisDetails.getString("demonym"));
+                pais.setPopulacao(paisDetails.getInt("population"));
+                pais.setArea(paisDetails.getString("area"));
+                pais.setBandeira(paisDetails.getString("flag"));
+                pais.setGini(paisDetails.getDouble("gini")); //TODO: Gini null
+                //pais.setIdiomas(paisDetails.getString("languages"));
+                //pais.setMoedas(paisDetails.getString("currencies"));
+                //pais.setDominios(paisDetails.getString("translations"));
+                //JSONArray languages = paisDetails.getJSONArray("timezones");
+
+                //int teste = languages.length();
+                //int teste2;
+                //JSONObject language =
+                //        languages.getJSONObject(0);
+
+                //pais.setFusos(language.getString(""));
+                //pais.setFronteiras(paisDetails.getString("borders"));
+                //pais.setLatitude(paisDetails.getDouble("latlng"));
+                //pais.setLongitude(paisDetails.getDouble("latlng"));
+
+                CreateView(pais);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
