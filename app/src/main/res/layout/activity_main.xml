@@ -9,11 +9,11 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Escolha uma região: " />
+        android:text="@string/escolha_regiao" />
 
         <Spinner
             android:id="@+id/regiao"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
 

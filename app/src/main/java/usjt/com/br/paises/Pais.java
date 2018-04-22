@@ -1,5 +1,7 @@
 package usjt.com.br.paises;
 
+import android.graphics.Bitmap;
+
 /**
  * Willian Vicente Prado
  * RA: 816119009
@@ -18,6 +20,7 @@ public class Pais {
     private int populacao;
     private String area;
     private String bandeira;
+    private Bitmap bandeiraBitMap;
     private double gini;
     private String idiomas;
     private String moedas;
@@ -100,6 +103,14 @@ public class Pais {
 
     public void setBandeira(String bandeira) {
         this.bandeira = bandeira;
+    }
+
+    public Bitmap getBandeiraBitMap() {
+        return bandeiraBitMap;
+    }
+
+    public void setBandeiraBitMap(Bitmap bandeiraBitMap) {
+        this.bandeiraBitMap = bandeiraBitMap;
     }
 
     public double getGini() {

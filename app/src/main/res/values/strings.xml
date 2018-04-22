@@ -21,5 +21,6 @@
     <string name="fronteirasText">Fronteira: </string>
     <string name="latitudeText">Latitude: </string>
     <string name="longitudeText">Longitude: </string>
+    <string name="escolha_regiao">Escolha uma região:</string>
 
 </resources>

@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 
 public class ListarPaisesActivity extends Activity {
-    private List<String> lista;
+    private List<Pais> lista;
     public static final String DESCRICAO = "br.usjt.paises.descricao";
 
 
@@ -40,17 +40,19 @@ public class ListarPaisesActivity extends Activity {
         String chave = origemIntent.getStringExtra(MainActivity.NOME);
 
         if (chave.equals("Todas")) {
-            chave = "all";
-            new ConsomeWS().execute("https://restcountries.eu/rest/v2/" + chave + "?fields=name");
+            new ConsomeWS().execute("https://restcountries.eu/rest/v2/all?fields=name;capital;region;flag");
         } else {
-            new ConsomeWS().execute("https://restcountries.eu/rest/v2/region/" + chave + "?fields=name");
+            new ConsomeWS().execute("https://restcountries.eu/rest/v2/region/" + chave + "?fields=name;capital;region;flag");
         }
     }
 
     public void createView(){
         setContentView(R.layout.activity_listar_paises);
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lista);
+
+        ListarPaisesAdapter<Pais> adapter =
+                new ListarPaisesAdapter<>(this, lista);
+
+
         ListView listView =
                 findViewById(R.id.listView);
         listView.setAdapter(adapter);
@@ -59,7 +61,7 @@ public class ListarPaisesActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                 Intent intent = new Intent(ListarPaisesActivity.this, DetalhePaisActivity.class);
-                intent.putExtra(DESCRICAO, lista.get(pos));
+                intent.putExtra(DESCRICAO, lista.get(pos).getNome());
                 startActivity(intent);
             }
         });
@@ -85,20 +87,25 @@ public class ListarPaisesActivity extends Activity {
         @Override
         protected void onPostExecute(String json) {
             try {
-                List<String> listaNomes = new ArrayList<>();
+                List<Pais> listaNomes = new ArrayList<>();
                 int count = 1;
                 JSONArray names = new JSONArray(json);
 
 
                 while(count > 0){
                     try {
-                        JSONObject pais =
+                        Pais pais = new Pais();
+
+                        JSONObject paisInfo =
                                 names.getJSONObject(count);
 
-                        String name =
-                                pais.getString("name");
+                        pais.setNome(paisInfo.getString("name"));
+                        pais.setRegiao(paisInfo.getString("region"));
+                        pais.setCapital(paisInfo.getString("capital"));
+                        pais.setBandeira(paisInfo.getString("flag"));
+
                         count += 1;
-                        listaNomes.add(name);
+                        listaNomes.add(pais);
                     }catch(Exception ex){
                         count = -1;
                     }
