@@ -11,18 +11,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Created by Note-Willian on 3/27/2018.
+ * Willian Vicente Prado
+ * RA: 816119009
+ * ADSMCA3
  */
 
-public class DetalheChamadoActivity extends AppCompatActivity {
+public class DetalhePaisActivity extends AppCompatActivity {
     private TextView nomeTextView;
     private TextView codigo3TextView;
     private TextView capitalTextView;
@@ -63,8 +62,13 @@ public class DetalheChamadoActivity extends AppCompatActivity {
         areaTextView = (TextView) findViewById(R.id.areaTextView);
         bandeiraTextView = (TextView) findViewById(R.id.bandeiraTextView);
         giniTextView = (TextView) findViewById(R.id.giniTextView);
-
-
+        latitudeTextView = (TextView) findViewById(R.id.latitudeTextView);
+        longitudeTextView = (TextView) findViewById(R.id.longitudeTextView);
+        fusosTextView = (TextView) findViewById(R.id.fusosTextView);
+        fronteirasTextView = (TextView) findViewById(R.id.fronteirasTextView);
+        idiomasTextView  = (TextView) findViewById(R.id.idiomasTextView);
+        moedasTextView  = (TextView) findViewById(R.id.moedasTextView);
+        dominiosTextView  = (TextView) findViewById(R.id.dominiosTextView);
 
         nomeTextView.setText(pais.getNome());
         codigo3TextView.setText(pais.getCodigo3());
@@ -76,13 +80,13 @@ public class DetalheChamadoActivity extends AppCompatActivity {
         areaTextView.setText(pais.getArea());
         bandeiraTextView.setText(pais.getBandeira());
         giniTextView.setText(String.valueOf(pais.getGini()));
-        //idiomasTextView.setText(pais.getIdiomas());
-        //moedasTextView.setText(pais.getMoedas());
-        //dominiosTextView.setText(pais.getDominios());
-        //fusosTextView.setText(pais.getFusos());
-        //fronteirasTextView.setText(pais.getFronteiras());
-        //latitudeTextView.setText(String.valueOf(pais.getLatitude()));
-        //longitudeTextView.setText(String.valueOf(pais.getLongitude()));
+        idiomasTextView.setText(pais.getIdiomas());
+        moedasTextView.setText(pais.getMoedas());
+        dominiosTextView.setText(pais.getDominios());
+        fusosTextView.setText(pais.getFusos());
+        fronteirasTextView.setText(pais.getFronteiras());
+        latitudeTextView.setText(String.valueOf(pais.getLatitude()));
+        longitudeTextView.setText(String.valueOf(pais.getLongitude()));
     }
 
     private class ConsomeWS extends AsyncTask<String, Void, String> {
@@ -119,26 +123,72 @@ public class DetalheChamadoActivity extends AppCompatActivity {
                 pais.setPopulacao(paisDetails.getInt("population"));
                 pais.setArea(paisDetails.getString("area"));
                 pais.setBandeira(paisDetails.getString("flag"));
-                pais.setGini(paisDetails.getDouble("gini")); //TODO: Gini null
-                //pais.setIdiomas(paisDetails.getString("languages"));
-                //pais.setMoedas(paisDetails.getString("currencies"));
-                //pais.setDominios(paisDetails.getString("translations"));
-                //JSONArray languages = paisDetails.getJSONArray("timezones");
 
-                //int teste = languages.length();
-                //int teste2;
-                //JSONObject language =
-                //        languages.getJSONObject(0);
+                String teste = paisDetails.getString("gini");
+                if (teste == "null") {
+                    pais.setGini(0.0);
+                }else{
+                    pais.setGini(Double.parseDouble(teste));
+                }
 
-                //pais.setFusos(language.getString(""));
-                //pais.setFronteiras(paisDetails.getString("borders"));
-                //pais.setLatitude(paisDetails.getDouble("latlng"));
-                //pais.setLongitude(paisDetails.getDouble("latlng"));
+                JSONArray latlng = paisDetails.getJSONArray("latlng");
+                String latitude = latlng.getString(0);
+                pais.setLatitude(Double.parseDouble(latitude));
+                String longetude = latlng.getString(1);
+                pais.setLongitude(Double.parseDouble(longetude));
+
+                JSONArray timezones = paisDetails.getJSONArray("timezones");
+                pais.setFusos(concatenandoObjetoArrayJson(timezones));
+
+                JSONArray borders = paisDetails.getJSONArray("borders");
+                pais.setFronteiras(concatenandoObjetoArrayJson(borders));
+
+                JSONArray topLevelDomain = paisDetails.getJSONArray("topLevelDomain");
+                pais.setDominios(concatenandoObjetoArrayJson(topLevelDomain));
+
+                JSONArray languages = paisDetails.getJSONArray("languages");
+                pais.setIdiomas(concatenandoMultiplosObjetosArrayJson(languages));
+
+                JSONArray currencies = paisDetails.getJSONArray("currencies");
+                pais.setMoedas(concatenandoMultiplosObjetosArrayJson(currencies));
 
                 CreateView(pais);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public String concatenandoObjetoArrayJson(JSONArray array){
+        int count = 0;
+        boolean next = true;
+        String concat= "";
+
+        while(next == true) {
+            try {
+                concat += array.getString(count) + "\n";
+                count += 1;
+            } catch (Exception e) {
+                next = false;
+            }
+        }
+        return concat;
+    }
+
+    public String concatenandoMultiplosObjetosArrayJson(JSONArray array){
+        int count = 0;
+        boolean next = true;
+        String concat= "";
+
+        while(next == true) {
+            try{
+                JSONObject arrayJSONObject = array.getJSONObject(count);
+                concat += arrayJSONObject.getString("name") + "\n";
+                count += 1;
+            }catch(JSONException e) {
+                next = false;
+            }
+        }
+        return concat;
     }
 }

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +20,12 @@ import java.util.List;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+/**
+ * Willian Vicente Prado
+ * RA: 816119009
+ * ADSMCA3
+ */
 
 
 public class ListarPaisesActivity extends Activity {
@@ -53,7 +58,7 @@ public class ListarPaisesActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                Intent intent = new Intent(ListarPaisesActivity.this, DetalheChamadoActivity.class);
+                Intent intent = new Intent(ListarPaisesActivity.this, DetalhePaisActivity.class);
                 intent.putExtra(DESCRICAO, lista.get(pos));
                 startActivity(intent);
             }
