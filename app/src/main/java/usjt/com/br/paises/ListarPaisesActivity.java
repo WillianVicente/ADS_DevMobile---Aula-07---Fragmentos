@@ -31,6 +31,7 @@ import okhttp3.Response;
 public class ListarPaisesActivity extends Activity {
     private List<Pais> lista;
     public static final String DESCRICAO = "br.usjt.paises.descricao";
+    private PaisDAO paisDAO;
 
 
     @Override
@@ -38,11 +39,24 @@ public class ListarPaisesActivity extends Activity {
         super.onCreate(savedInstanceState);
         Intent origemIntent = getIntent();
         String chave = origemIntent.getStringExtra(MainActivity.NOME);
+        paisDAO = new PaisDAO(this);
 
         if (chave.equals("Todas")) {
-            new ConsomeWS().execute("https://restcountries.eu/rest/v2/all?fields=name;capital;region;flag");
+                lista = paisDAO.listarPaisesAll();
+            if(lista.size() > 0){
+                createView();
+            }
+            else{
+                new ConsomeWS().execute("https://restcountries.eu/rest/v2/all?fields=name;capital;region;flag");
+            }
         } else {
-            new ConsomeWS().execute("https://restcountries.eu/rest/v2/region/" + chave + "?fields=name;capital;region;flag");
+            lista = paisDAO.listarPaisesRegiao(chave);
+                if(lista.size() > 0){
+                    createView();
+                }
+                else{
+                    new ConsomeWS().execute("https://restcountries.eu/rest/v2/region/" + chave + "?fields=name;capital;region;flag");
+                }
         }
     }
 
@@ -106,6 +120,7 @@ public class ListarPaisesActivity extends Activity {
 
                         count += 1;
                         listaNomes.add(pais);
+                        paisDAO.inserirSimples(pais);
                     }catch(Exception ex){
                         count = -1;
                     }

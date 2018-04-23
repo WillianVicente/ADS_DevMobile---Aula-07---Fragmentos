@@ -33,6 +33,13 @@ public class Pais {
     public Pais(){
     }
 
+    public Pais(String nome , String regiao , String bandeira, String capital){
+        this.nome = nome;
+        this.bandeira = bandeira;
+        this.regiao = regiao;
+        this.capital = capital;
+    }
+
     public String getNome() {
         return nome;
     }
