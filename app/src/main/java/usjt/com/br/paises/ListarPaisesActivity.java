@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -43,20 +42,20 @@ public class ListarPaisesActivity extends Activity {
 
         if (chave.equals("Todas")) {
                 lista = paisDAO.listarPaisesAll();
-            if(lista.size() > 0){
-                createView();
-            }
-            else{
-                new ConsomeWS().execute("https://restcountries.eu/rest/v2/all?fields=name;capital;region;flag");
-            }
+            //if(lista.size() > 0){
+            //    createView();
+            //}
+            //else{
+                new ConsomeWS().execute("https://restcountries.eu/rest/v2/all?fields=name;capital;region;alpha3Code");
+            //}
         } else {
             lista = paisDAO.listarPaisesRegiao(chave);
-                if(lista.size() > 0){
-                    createView();
-                }
-                else{
-                    new ConsomeWS().execute("https://restcountries.eu/rest/v2/region/" + chave + "?fields=name;capital;region;flag");
-                }
+                //if(lista.size() > 0){
+                //    createView();
+                //}
+                //else{
+                    new ConsomeWS().execute("https://restcountries.eu/rest/v2/region/" + chave + "?fields=name;capital;region;alpha3Code");
+                //}
         }
     }
 
@@ -116,7 +115,7 @@ public class ListarPaisesActivity extends Activity {
                         pais.setNome(paisInfo.getString("name"));
                         pais.setRegiao(paisInfo.getString("region"));
                         pais.setCapital(paisInfo.getString("capital"));
-                        pais.setBandeira(paisInfo.getString("flag"));
+                        pais.setCodigo3(paisInfo.getString("alpha3Code"));
 
                         count += 1;
                         listaNomes.add(pais);

@@ -69,7 +69,7 @@ public class ListarPaisesAdapter<T> extends BaseAdapter {
         viewHolder.nome.setText(((Pais) pais).getNome());
         viewHolder.capital.setText("Capital: " + ((Pais) pais).getCapital());
         viewHolder.regiao.setText("Região: " + ((Pais) pais).getRegiao());
-        viewHolder.bandeira.setImageBitmap(((Pais) pais).getBandeiraBitMap());
+        viewHolder.bandeira.setImageDrawable(usjt.com.br.paises.Util.getDrawable(this.context, ((Pais) pais).getCodigo3().toLowerCase()));
 
 
         return view;
@@ -87,32 +87,6 @@ public class ListarPaisesAdapter<T> extends BaseAdapter {
             nome = view.findViewById(R.id.nomeTextView);
             capital = view.findViewById(R.id.regiaoTextView);
             regiao = view.findViewById(R.id.capitalTextView);
-        }
-    }
-
-    private class DownloadFilesTask extends AsyncTask<String , Void, Bitmap>
-    {
-        @Override
-        protected Bitmap doInBackground(String... url) {
-            try {
-                URL aURL = new URL(url[0]);
-                URLConnection conn = aURL.openConnection();
-                conn.connect();
-                InputStream is = conn.getInputStream();
-                BufferedInputStream bis = new BufferedInputStream(is);
-                Bitmap bm = BitmapFactory.decodeStream(bis);
-                bis.close();
-                is.close();
-                return bm;
-            } catch (IOException e) {
-                Log.e(TAG, "Error getting bitmap", e);
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap result) {
-
         }
     }
 }

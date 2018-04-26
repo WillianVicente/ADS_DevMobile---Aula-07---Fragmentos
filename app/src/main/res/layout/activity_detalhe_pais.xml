@@ -2,298 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context="usjt.com.br.paises.DetalhePaisActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:padding="8dp">
 
-        <TextView
-            android:text="@string/nomeText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
         <TextView
             android:id="@+id/nomeTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="@string/codigo3Text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/codigo3TextView"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:lines="1"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/bandeiraImageView"
+        android:layout_width="220dp"
+        android:layout_height="110dp"
+        android:layout_gravity="center" />
 
-    <LinearLayout
+    <fragment
+        android:id="@+id/detalhe_pais_fragment"
+        class="usjt.com.br.paises.DetalhePaisFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_detalhe_pais" />
 
-        <TextView
-            android:text="@string/capitalText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/capitalTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="@string/regiaoText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/regiaoTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="@string/subRegiaoText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/subRegiaoTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="@string/demonimoText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/demonimoTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="@string/populacaoText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/populacaoTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="@string/areaText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/areaTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="@string/bandeiraText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/bandeiraTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="@string/giniText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/giniTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="@string/idiomasText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/idiomasTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="@string/moedasText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/moedasTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="@string/dominiosText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/dominiosTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="@string/fusosText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/fusosTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="@string/fronteirasText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/fronteirasTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="@string/latitudeText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/latitudeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="@string/longitudeText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/longitudeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
 </LinearLayout>

@@ -3,7 +3,9 @@ package usjt.com.br.paises;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -21,7 +23,7 @@ import okhttp3.Response;
  * ADSMCA3
  */
 
-public class DetalhePaisActivity extends AppCompatActivity {
+public class DetalhePaisActivity extends FragmentActivity {
     private TextView nomeTextView;
     private TextView codigo3TextView;
     private TextView capitalTextView;
@@ -39,6 +41,7 @@ public class DetalhePaisActivity extends AppCompatActivity {
     private TextView fronteirasTextView;
     private TextView latitudeTextView;
     private TextView longitudeTextView;
+    private ImageView bandeiraImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class DetalhePaisActivity extends AppCompatActivity {
     }
 
     private void CreateView(Pais pais){
-
+        bandeiraImageView = (ImageView)findViewById(R.id.bandeiraImageView);
         nomeTextView = (TextView) findViewById(R.id.nomeTextView);
         codigo3TextView = (TextView) findViewById(R.id.codigo3TextView);
         capitalTextView = (TextView) findViewById(R.id.capitalTextView);
@@ -70,6 +73,7 @@ public class DetalhePaisActivity extends AppCompatActivity {
         moedasTextView  = (TextView) findViewById(R.id.moedasTextView);
         dominiosTextView  = (TextView) findViewById(R.id.dominiosTextView);
 
+        bandeiraImageView.setImageDrawable(usjt.com.br.paises.Util.getDrawable(this, pais.getCodigo3().toLowerCase()));
         nomeTextView.setText(pais.getNome());
         codigo3TextView.setText(pais.getCodigo3());
         capitalTextView.setText(pais.getCapital());
