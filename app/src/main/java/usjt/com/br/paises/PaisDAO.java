@@ -8,6 +8,12 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Willian Vicente Prado
+ * RA: 816119009
+ * ADSMCA3
+ */
+
 public class PaisDAO {
 
     private Context context;

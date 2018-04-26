@@ -24,6 +24,12 @@ import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
+/**
+ * Willian Vicente Prado
+ * RA: 816119009
+ * ADSMCA3
+ */
+
 public class ListarPaisesAdapter<T> extends BaseAdapter {
 
     private List<T> paises;
